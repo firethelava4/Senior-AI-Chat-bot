@@ -1,112 +1,106 @@
 const dictionary = {
   "phishing": {
-    definition: "A type of cyberattack where attackers pretend to be a trustworthy entity to steal sensitive information.",
-    example: "Example: An attacker sends an email pretending to be your bank, asking for your login details."
+    definition: "A type of cyberattack where attackers impersonate legitimate organizations to trick individuals into providing sensitive information.",
+    example: "Example: An attacker sends an email that looks like it's from your bank, asking you to verify your account details."
   },
   "malware": {
-    definition: "Malicious software designed to disrupt, damage, or gain unauthorized access to systems.",
-    example: "Example: A virus that encrypts your files and demands payment to unlock them is a type of malware."
-  },
-  "firewall": {
-    definition: "A network security device or software that monitors and filters incoming and outgoing traffic based on security rules.",
-    example: "Example: A company uses a firewall to block access to malicious websites."
+    definition: "Malicious software designed to harm, exploit, or otherwise compromise a computer system.",
+    example: "Example: A virus that encrypts your files and demands a ransom to unlock them."
   },
   "ransomware": {
-    definition: "A type of malware that encrypts a victim's data and demands payment for the decryption key.",
-    example: "Example: An attacker encrypts your personal files and asks for $500 to unlock them."
+    definition: "A type of malware that encrypts a victim's files and demands payment to restore access.",
+    example: "Example: A hospital's database is locked by attackers who demand a ransom for the decryption key."
+  },
+  "social engineering": {
+    definition: "Manipulating people into divulging confidential information or performing actions that compromise security.",
+    example: "Example: An attacker calls pretending to be IT support, asking for your password to fix a fake issue."
+  },
+  "firewall": {
+    definition: "A network security system that monitors and controls incoming and outgoing network traffic.",
+    example: "Example: A firewall blocks unauthorized access to your computer while allowing legitimate traffic."
   },
   "encryption": {
-    definition: "The process of converting data into a coded form to prevent unauthorized access.",
-    example: "Example: Emails can be encrypted so only the recipient can read them."
-  },
-  "scamming": {
-    definition: "The act of deceiving someone to gain money, information, or other benefits through fraudulent means.",
-    example: "Example: A scammer pretends to be a technical support representative and tricks you into paying for fake services."
+    definition: "The process of converting data into a coded format to prevent unauthorized access.",
+    example: "Example: Messages sent over WhatsApp are encrypted to ensure only the sender and receiver can read them."
   },
   "deepfake": {
-    definition: "A synthetic media technology that uses AI to create convincing fake videos or images of real people.",
-    example: "Example: A deepfake video might show a celebrity saying something they never actually said."
+    definition: "A media technology that uses AI to create highly realistic fake videos or audio.",
+    example: "Example: A fake video showing a politician saying something they never actually said."
   },
   "adware": {
-    definition: "Software that displays unwanted advertisements on your device, often bundled with legitimate software.",
-    example: "Example: Adware might show pop-up ads in your browser after you install a free game."
+    definition: "Software that automatically displays or downloads advertisements, often without the user's consent.",
+    example: "Example: A program that opens pop-up ads every time you open your browser."
   },
   "backdoor": {
-    definition: "A hidden method for bypassing normal authentication or security in a system, often used by attackers.",
-    example: "Example: An attacker installs a backdoor to access a company's server without detection."
+    definition: "A method of bypassing normal authentication to access a system or network.",
+    example: "Example: An attacker installs a backdoor on your server to access it remotely whenever they want."
   },
   "catfishing": {
-    definition: "The act of creating a fake online identity to deceive others, often for fraudulent purposes.",
-    example: "Example: Someone pretending to be a friend on social media to extract personal details is catfishing."
+    definition: "The act of creating a fake online identity to deceive others.",
+    example: "Example: Someone pretends to be a wealthy individual to scam victims out of money on dating apps."
   },
   "cookie": {
-    definition: "A small piece of data stored on a user's device by a website to remember information about the user.",
-    example: "Example: A website uses cookies to keep you logged in or remember your shopping cart items."
+    definition: "A small piece of data stored on your computer by a website to track your online activities.",
+    example: "Example: A website uses cookies to remember your login information and preferences."
   },
   "cryptojacking": {
-    definition: "Unauthorized use of someone's device to mine cryptocurrency without their consent.",
-    example: "Example: A malicious website runs cryptojacking scripts in your browser, slowing down your device."
+    definition: "The unauthorized use of someone's computer to mine cryptocurrency.",
+    example: "Example: A malicious script runs in the background of your browser, using your computer's resources to mine Bitcoin."
   },
   "hacker": {
-    definition: "An individual who uses technical skills to gain unauthorized access to systems or data.",
-    example: "Example: A hacker breaks into a company's network to steal confidential information."
+    definition: "An individual skilled in using computers to gain unauthorized access to systems or networks.",
+    example: "Example: A hacker breaches a company's database to steal sensitive customer information."
+  },
+  "scamming": {
+    definition: "Fraudulent schemes designed to deceive individuals into giving away money or personal information.",
+    example: "Example: An email claims you've won a lottery and asks for your bank details to transfer the prize."
   }
 };
 
+
 let suggestedWord = null;
+
+document.getElementById("start-btn").addEventListener("click", () => {
+  document.getElementById("start-screen").classList.add("hidden");
+  document.getElementById("dictionary-screen").classList.remove("hidden");
+});
 
 function showSuggestions() {
   const input = document.getElementById("term-input").value.toLowerCase();
-  const suggestions = document.getElementById("suggestions");
+  const suggestionsDiv = document.getElementById("suggestions");
+  const output = document.getElementById("output");
   const definition = document.getElementById("definition");
   const example = document.getElementById("example");
-  const buttonContainer = document.getElementById("buttons");
+  const buttons = document.getElementById("buttons");
 
-  // Clear previous output
-  suggestions.innerHTML = "";
+  suggestionsDiv.innerHTML = "";
   definition.textContent = "";
   example.textContent = "";
-  buttonContainer.innerHTML = "";
+  buttons.innerHTML = "";
 
-  if (input === "teach me") {
-    teachMe();
-    return;
-  }
+  if (!input) return;
+
+  const matches = Object.keys(dictionary).filter((term) =>
+    term.includes(input)
+  );
+
+  matches.slice(0, 3).forEach((term) => {
+    const suggestion = document.createElement("div");
+    suggestion.textContent = term;
+    suggestion.onclick = () => defineTerm(term);
+    suggestionsDiv.appendChild(suggestion);
+  });
 
   if (!dictionary[input]) {
     const closestMatch = findClosestMatch(input);
-
     if (closestMatch) {
       suggestedWord = closestMatch;
       definition.textContent = `Did you mean "${closestMatch}"?`;
-      example.textContent = "";
-
-      const yesButton = document.createElement("button");
-      yesButton.textContent = "Yes";
-      yesButton.onclick = () => defineTerm(suggestedWord);
-
-      const noButton = document.createElement("button");
-      noButton.textContent = "No";
-      noButton.onclick = resetGreeting;
-
-      buttonContainer.appendChild(yesButton);
-      buttonContainer.appendChild(noButton);
-    } else {
-      definition.textContent = "I couldn't find that term. Here are some terms you can try:";
-      example.textContent = "";
-      Object.keys(dictionary).forEach((term) => {
-        const suggestionDiv = document.createElement("div");
-        suggestionDiv.textContent = term;
-        suggestionDiv.onclick = () => defineTerm(term);
-        suggestions.appendChild(suggestionDiv);
-      });
-      suggestions.style.display = "block";
+      createYesNoButtons();
     }
-
     return;
   }
 
-  // If the word is found in the dictionary
   suggestedWord = null;
   defineTerm(input);
 }
@@ -115,9 +109,14 @@ function defineTerm(term) {
   const output = dictionary[term];
   document.getElementById("definition").textContent = `Definition: ${output.definition}`;
   document.getElementById("example").textContent = `Example: ${output.example}`;
-  document.getElementById("suggestions").style.display = "none";
-  document.getElementById("buttons").innerHTML = ""; // Clear buttons
-  document.getElementById("term-input").value = term; // Autofill input
+  document.getElementById("term-input").value = term;
+  document.getElementById("suggestions").innerHTML = "";
+}
+
+function teachMe() {
+  const terms = Object.keys(dictionary);
+  const randomTerm = terms[Math.floor(Math.random() * terms.length)];
+  defineTerm(randomTerm);
 }
 
 function findClosestMatch(input) {
@@ -127,13 +126,33 @@ function findClosestMatch(input) {
 
   words.forEach((word) => {
     const distance = levenshteinDistance(input, word);
-    if (distance < shortestDistance && distance <= 2) { // Allow a max distance of 2
+    if (distance < shortestDistance && distance <= 2) {
       closest = word;
       shortestDistance = distance;
     }
   });
 
   return closest;
+}
+
+function createYesNoButtons() {
+  const buttonsDiv = document.getElementById("buttons");
+  const yesButton = document.createElement("button");
+  yesButton.textContent = "Yes";
+  yesButton.onclick = () => defineTerm(suggestedWord);
+
+  const noButton = document.createElement("button");
+  noButton.textContent = "No";
+  noButton.onclick = resetGreeting;
+
+  buttonsDiv.appendChild(yesButton);
+  buttonsDiv.appendChild(noButton);
+}
+
+function resetGreeting() {
+  document.getElementById("definition").textContent = "Type a term to learn more!";
+  document.getElementById("example").textContent = "";
+  document.getElementById("buttons").innerHTML = "";
 }
 
 function levenshteinDistance(a, b) {
@@ -156,18 +175,5 @@ function levenshteinDistance(a, b) {
   }
 
   return matrix[a.length][b.length];
-}
-
-function resetGreeting() {
-  document.getElementById("definition").textContent =
-    "Hello! Type a cybersecurity term to get started.";
-  document.getElementById("example").textContent = "";
-  document.getElementById("buttons").innerHTML = ""; // Clear buttons
-}
-
-function teachMe() {
-  const terms = Object.keys(dictionary);
-  const randomTerm = terms[Math.floor(Math.random() * terms.length)];
-  defineTerm(randomTerm);
 }
 
