@@ -3,27 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cybersecurity Dictionary Bot</title>
-  <link rel="stylesheet" href="style.css">
-  <div id="buttons"></div>
+  <title>Cybersecurity Dictionary</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Cybersecurity Dictionary</h1>
-    <div class="input-section">
-      <input
-        type="text"
-        id="term-input"
-        placeholder="Type a cybersecurity term..."
-        oninput="showSuggestions()"
-      />
-      <div id="suggestions"></div>
-    </div>
-    <div id="output">
-      <p id="definition"></p>
-      <p id="example"></p>
+  <div id="start-screen" class="screen">
+    <h1>Welcome to the Cybersecurity Dictionary</h1>
+    <p>Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks. Learn key terms to stay informed and secure.</p>
+    <button id="start-btn">Start</button>
+  </div>
+
+  <div id="dictionary-screen" class="screen hidden">
+    <div class="dictionary-box">
+      <h2>Cybersecurity Dictionary</h2>
+      <input type="text" id="term-input" placeholder="Type a term..." oninput="showSuggestions()">
+      <div id="suggestions" class="suggestions"></div>
+      <button id="teach-me-btn" onclick="teachMe()">Teach Me</button>
+      <div id="output">
+        <p id="definition"></p>
+        <p id="example"></p>
+      </div>
+      <div id="buttons"></div>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
+
