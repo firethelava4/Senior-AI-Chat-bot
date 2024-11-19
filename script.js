@@ -58,14 +58,15 @@ let suggestedWord = null;
 function showSuggestions() {
   const input = document.getElementById("term-input").value.toLowerCase();
   const suggestions = document.getElementById("suggestions");
-  const output = document.getElementById("output");
   const definition = document.getElementById("definition");
   const example = document.getElementById("example");
+  const buttonContainer = document.getElementById("buttons");
 
   // Clear previous output
   suggestions.innerHTML = "";
   definition.textContent = "";
   example.textContent = "";
+  buttonContainer.innerHTML = "";
 
   if (input === "teach me") {
     teachMe();
@@ -74,14 +75,34 @@ function showSuggestions() {
 
   if (!dictionary[input]) {
     const closestMatch = findClosestMatch(input);
+
     if (closestMatch) {
       suggestedWord = closestMatch;
-      definition.textContent = `Did you mean "${closestMatch}"? Type "yes" or "no".`;
+      definition.textContent = `Did you mean "${closestMatch}"?`;
       example.textContent = "";
+
+      const yesButton = document.createElement("button");
+      yesButton.textContent = "Yes";
+      yesButton.onclick = () => defineTerm(suggestedWord);
+
+      const noButton = document.createElement("button");
+      noButton.textContent = "No";
+      noButton.onclick = resetGreeting;
+
+      buttonContainer.appendChild(yesButton);
+      buttonContainer.appendChild(noButton);
     } else {
-      definition.textContent = "Sorry, I couldn't find that term in my database.";
+      definition.textContent = "I couldn't find that term. Here are some terms you can try:";
       example.textContent = "";
+      Object.keys(dictionary).forEach((term) => {
+        const suggestionDiv = document.createElement("div");
+        suggestionDiv.textContent = term;
+        suggestionDiv.onclick = () => defineTerm(term);
+        suggestions.appendChild(suggestionDiv);
+      });
+      suggestions.style.display = "block";
     }
+
     return;
   }
 
@@ -95,6 +116,8 @@ function defineTerm(term) {
   document.getElementById("definition").textContent = `Definition: ${output.definition}`;
   document.getElementById("example").textContent = `Example: ${output.example}`;
   document.getElementById("suggestions").style.display = "none";
+  document.getElementById("buttons").innerHTML = ""; // Clear buttons
+  document.getElementById("term-input").value = term; // Autofill input
 }
 
 function findClosestMatch(input) {
@@ -135,20 +158,11 @@ function levenshteinDistance(a, b) {
   return matrix[a.length][b.length];
 }
 
-function handleResponse(input) {
-  if (input === "yes" && suggestedWord) {
-    defineTerm(suggestedWord);
-  } else if (input === "no") {
-    resetGreeting();
-  } else {
-    showSuggestions();
-  }
-}
-
 function resetGreeting() {
   document.getElementById("definition").textContent =
     "Hello! Type a cybersecurity term to get started.";
   document.getElementById("example").textContent = "";
+  document.getElementById("buttons").innerHTML = ""; // Clear buttons
 }
 
 function teachMe() {
@@ -156,5 +170,4 @@ function teachMe() {
   const randomTerm = terms[Math.floor(Math.random() * terms.length)];
   defineTerm(randomTerm);
 }
-
 
