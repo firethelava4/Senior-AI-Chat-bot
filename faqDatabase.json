@@ -1,0 +1,26 @@
+[
+  {
+    "patterns": ["hello", "hi", "hey"],
+    "response": "Hello! How can I assist you in avoiding scams today?"
+  },
+  {
+    "patterns": ["phishing", "email scam"],
+    "response": "Phishing scams often involve fake emails pretending to be from trusted sources. Never click on links or provide sensitive info without verifying the sender."
+  },
+  {
+    "patterns": ["phone call", "phone scam"],
+    "response": "Be cautious of unsolicited calls asking for payments or personal details. Verify their identity before proceeding."
+  },
+  {
+    "patterns": ["too good to be true", "fake offers"],
+    "response": "If an offer sounds too good to be true, it probably is! Research thoroughly before committing."
+  },
+  {
+    "patterns": ["identity theft", "personal information"],
+    "response": "To prevent identity theft, use strong passwords, avoid sharing sensitive details, and monitor your accounts regularly."
+  },
+  {
+    "patterns": ["suspicious", "unfamiliar email"],
+    "response": "Avoid interacting with unfamiliar emails. Check for poor grammar or odd links, and don't download unexpected attachments."
+  }
+]
