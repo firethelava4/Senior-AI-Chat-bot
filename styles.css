@@ -1,68 +1,133 @@
+/* General Styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
+  background: linear-gradient(to bottom, #4facfe, #00f2fe);
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-.container {
-  width: 90%;
-  max-width: 600px;
-  text-align: center;
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  color: #333;
-}
-
-.input-section {
-  margin-bottom: 20px;
-}
-
-#term-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-#suggestions {
-  text-align: left;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 5px;
-  max-height: 150px;
-  overflow-y: auto;
+/* Hidden Screen */
+.hidden {
   display: none;
 }
 
-#suggestions div {
-  padding: 10px;
+/* Start Screen */
+#start-screen {
+  text-align: center;
+}
+
+#start-screen h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+#start-screen p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+#start-screen button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background: #0078d7;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
   cursor: pointer;
 }
 
-#suggestions div:hover {
-  background-color: #f0f0f0;
+#start-screen button:hover {
+  background: #005bb5;
 }
 
-#output {
-  background: #f9f9f9;
-  padding: 15px;
+/* Dictionary Screen */
+#dictionary-screen {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dictionary-box {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.dictionary-box h2 {
+  color: #0078d7;
+  margin-bottom: 1rem;
+}
+
+.dictionary-box input {
+  width: 80%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  border: 1px solid #ddd;
+}
+
+.dictionary-box #teach-me-btn {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  background: #0078d7;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.dictionary-box #teach-me-btn:hover {
+  background: #005bb5;
+}
+
+/* Suggestions */
+.suggestions {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.suggestions div {
+  background: #0078d7;
+  color: #ffffff;
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.suggestions div:hover {
+  background: #005bb5;
+}
+
+/* Output Section */
+#output {
+  margin-top: 20px;
 }
 
 #output p {
+  font-size: 1rem;
   margin: 10px 0;
+}
+
+#buttons button {
+  margin: 10px 5px;
+  padding: 10px 20px;
+  background: #0078d7;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+#buttons button:hover {
+  background: #005bb5;
 }
 
