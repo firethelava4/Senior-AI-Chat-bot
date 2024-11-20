@@ -1,61 +1,13 @@
-const dictionary = {
-  "phishing": {
-    definition: "A type of cyberattack where attackers impersonate legitimate organizations to trick individuals into providing sensitive information.",
-    example: "Example: An attacker sends an email that looks like it's from your bank, asking you to verify your account details."
-  },
-  "malware": {
-    definition: "Malicious software designed to harm, exploit, or otherwise compromise a computer system.",
-    example: "Example: A virus that encrypts your files and demands a ransom to unlock them."
-  },
-  "ransomware": {
-    definition: "A type of malware that encrypts a victim's files and demands payment to restore access.",
-    example: "Example: A hospital's database is locked by attackers who demand a ransom for the decryption key."
-  },
-  "social engineering": {
-    definition: "Manipulating people into divulging confidential information or performing actions that compromise security.",
-    example: "Example: An attacker calls pretending to be IT support, asking for your password to fix a fake issue."
-  },
-  "firewall": {
-    definition: "A network security system that monitors and controls incoming and outgoing network traffic.",
-    example: "Example: A firewall blocks unauthorized access to your computer while allowing legitimate traffic."
-  },
-  "encryption": {
-    definition: "The process of converting data into a coded format to prevent unauthorized access.",
-    example: "Example: Messages sent over WhatsApp are encrypted to ensure only the sender and receiver can read them."
-  },
-  "deepfake": {
-    definition: "A media technology that uses AI to create highly realistic fake videos or audio.",
-    example: "Example: A fake video showing a politician saying something they never actually said."
-  },
-  "adware": {
-    definition: "Software that automatically displays or downloads advertisements, often without the user's consent.",
-    example: "Example: A program that opens pop-up ads every time you open your browser."
-  },
-  "backdoor": {
-    definition: "A method of bypassing normal authentication to access a system or network.",
-    example: "Example: An attacker installs a backdoor on your server to access it remotely whenever they want."
-  },
-  "catfishing": {
-    definition: "The act of creating a fake online identity to deceive others.",
-    example: "Example: Someone pretends to be a wealthy individual to scam victims out of money on dating apps."
-  },
-  "cookie": {
-    definition: "A small piece of data stored on your computer by a website to track your online activities.",
-    example: "Example: A website uses cookies to remember your login information and preferences."
-  },
-  "cryptojacking": {
-    definition: "The unauthorized use of someone's computer to mine cryptocurrency.",
-    example: "Example: A malicious script runs in the background of your browser, using your computer's resources to mine Bitcoin."
-  },
-  "hacker": {
-    definition: "An individual skilled in using computers to gain unauthorized access to systems or networks.",
-    example: "Example: A hacker breaches a company's database to steal sensitive customer information."
-  },
-  "scamming": {
-    definition: "Fraudulent schemes designed to deceive individuals into giving away money or personal information.",
-    example: "Example: An email claims you've won a lottery and asks for your bank details to transfer the prize."
-  }
-};
+let dictionary = {};
+
+fetch('dictionary.json')
+  .then(response => response.json())
+  .then(data => {
+    dictionary = data;
+    console.log('Dictionary loaded:', dictionary);
+  })
+  .catch(error => console.error('Error loading dictionary:', error));
+
 
 
 let suggestedWord = null;
