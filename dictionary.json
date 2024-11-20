@@ -25,7 +25,8 @@
   },
   "deepfake": {
     "definition": "A media technology that uses AI to create highly realistic fake videos or audio.",
-    "example": "A fake video showing a politician saying something they never actually said."
+    "example": "A fake video showing a politician saying something they never actually said.",
+    "how to avoid" : "Ask personal questions only theactual person would know."
   },
   "adware": {
     "definition": "Software that automatically displays or downloads advertisements, often without the user's consent.",
