@@ -1,131 +1,126 @@
-// Fetch the dictionary JSON
-let dictionary = {};
+const dictionary = {
+  "phishing": { definition: "A type of cyberattack...", example: "Example: An attacker sends..." },
+  "malware": { definition: "Malicious software...", example: "Example: A virus that..." },
+  // Add the rest of your dictionary terms here...
+};
 
-fetch('dictionary.json')
-  .then(response => response.json())
-  .then(data => {
-    dictionary = data;
-    console.log('Dictionary loaded:', dictionary);
-  })
-  .catch(error => console.error('Error loading dictionary:', error));
+let suggestedWord = null;
 
-// DOM Elements
-const searchInput = document.getElementById('search-bar');
-const output = document.getElementById('output');
-const suggestions = document.getElementById('suggestions');
-const teachMeButton = document.getElementById('teach-me');
-const startScreen = document.getElementById('start-screen');
-const dictionaryContainer = document.getElementById('dictionary-container');
-const startButton = document.getElementById('start-button');
+document.getElementById("start-btn").addEventListener("click", () => {
+  document.getElementById("start-screen").classList.add("hidden");
+  document.getElementById("dictionary-screen").classList.remove("hidden");
+});
 
-// Event listener for the search bar
-searchInput.addEventListener('input', handleInput);
+function showSuggestions() {
+  const input = document.getElementById("term-input").value.toLowerCase();
+  const suggestionsDiv = document.getElementById("suggestions");
+  const output = document.getElementById("output");
+  const definition = document.getElementById("definition");
+  const example = document.getElementById("example");
+  const buttons = document.getElementById("buttons");
 
-// Event listener for the teach-me button
-teachMeButton.addEventListener('click', teachRandomWord);
+  suggestionsDiv.innerHTML = "";
+  definition.textContent = "";
+  example.textContent = "";
+  buttons.innerHTML = "";
 
-// Event listener for the start button
-startButton.addEventListener('click', openDictionary);
+  if (!input) return;
 
-// Handle user input in the search bar
-function handleInput() {
-  const userInput = searchInput.value.trim().toLowerCase();
-  suggestions.innerHTML = '';
-
-  if (!userInput) {
-    output.innerHTML = '';
-    return;
-  }
-
-  const matchingTerms = Object.keys(dictionary).filter(term =>
-    term.startsWith(userInput)
+  const matches = Object.keys(dictionary).filter((term) =>
+    term.includes(input)
   );
 
-  if (matchingTerms.length === 0) {
-    const possibleTerms = Object.keys(dictionary).slice(0, 3);
-    suggestions.innerHTML = `
-      <p>Did you mean:</p>
-      <div>
-        ${possibleTerms
-          .map(
-            term => `<button onclick="autofillSuggestion('${term}')">${term}</button>`
-          )
-          .join(' ')}
-      </div>
-    `;
-  } else if (matchingTerms.length === 1 && matchingTerms[0] === userInput) {
-    displayResult(userInput);
-  } else {
-    const limitedSuggestions = matchingTerms.slice(0, 3);
-    suggestions.innerHTML = `
-      <p>Did you mean:</p>
-      <div>
-        ${limitedSuggestions
-          .map(
-            term => `<button onclick="autofillSuggestion('${term}')">${term}</button>`
-          )
-          .join(' ')}
-      </div>
-    `;
-  }
-}
+  matches.slice(0, 3).forEach((term) => {
+    const suggestion = document.createElement("div");
+    suggestion.textContent = term;
+    suggestion.onclick = () => defineTerm(term);
+    suggestionsDiv.appendChild(suggestion);
+  });
 
-// Autofill the suggestion and display the result
-function autofillSuggestion(term) {
-  searchInput.value = term;
-  displayResult(term);
-  suggestions.innerHTML = '';
-}
-
-// Display the result in the output area
-function displayResult(term) {
-  const definition = dictionary[term]?.definition;
-  const example = dictionary[term]?.example;
-  const avoidance = dictionary[term]?.avoidance;
-
-  if (definition && example) {
-    let outputHTML = `
-      <p><strong>Definition:</strong> ${definition}</p>
-      <p><strong>Example:</strong> ${example}</p>
-    `;
-
-    if (avoidance) {
-      outputHTML += `<p><strong>How to Avoid:</strong> ${avoidance}</p>`;
+  if (!dictionary[input]) {
+    const closestMatch = findClosestMatch(input);
+    if (closestMatch) {
+      suggestedWord = closestMatch;
+      definition.textContent = `Did you mean "${closestMatch}"?`;
+      createYesNoButtons();
     }
-
-    output.innerHTML = outputHTML;
-  } else {
-    output.innerHTML = `<p>Sorry, we couldn't find that term.</p>`;
-  }
-}
-
-// Teach a random word from the dictionary
-function teachRandomWord() {
-  const terms = Object.keys(dictionary);
-  if (terms.length === 0) {
-    output.innerHTML = `<p>Loading dictionary...</p>`;
     return;
   }
 
-  const randomIndex = Math.floor(Math.random() * terms.length);
-  const randomTerm = terms[randomIndex];
-  displayResult(randomTerm);
+  suggestedWord = null;
+  defineTerm(input);
 }
 
-// Open the dictionary from the start screen
-function openDictionary() {
-  const startScreen = document.getElementById('start-screen');
-  const dictionaryContainer = document.getElementById('dictionary-container');
+function defineTerm(term) {
+  const output = dictionary[term];
+  document.getElementById("definition").textContent = `Definition: ${output.definition}`;
+  document.getElementById("example").textContent = `Example: ${output.example}`;
+  document.getElementById("term-input").value = term;
+  document.getElementById("suggestions").innerHTML = "";
+}
 
-  // Ensure elements exist before modifying them
-  if (startScreen && dictionaryContainer) {
-    startScreen.style.display = 'none'; // Hide the start screen
-    dictionaryContainer.style.display = 'block'; // Show the dictionary
-  } else {
-    console.error('Start screen or dictionary container not found.');
+function teachMe() {
+  const terms = Object.keys(dictionary);
+  const randomTerm = terms[Math.floor(Math.random() * terms.length)];
+  defineTerm(randomTerm);
+}
+
+function findClosestMatch(input) {
+  const words = Object.keys(dictionary);
+  let closest = null;
+  let shortestDistance = Infinity;
+
+  words.forEach((word) => {
+    const distance = levenshteinDistance(input, word);
+    if (distance < shortestDistance && distance <= 2) {
+      closest = word;
+      shortestDistance = distance;
+    }
+  });
+
+  return closest;
+}
+
+function createYesNoButtons() {
+  const buttonsDiv = document.getElementById("buttons");
+  const yesButton = document.createElement("button");
+  yesButton.textContent = "Yes";
+  yesButton.onclick = () => defineTerm(suggestedWord);
+
+  const noButton = document.createElement("button");
+  noButton.textContent = "No";
+  noButton.onclick = resetGreeting;
+
+  buttonsDiv.appendChild(yesButton);
+  buttonsDiv.appendChild(noButton);
+}
+
+function resetGreeting() {
+  document.getElementById("definition").textContent = "Type a term to learn more!";
+  document.getElementById("example").textContent = "";
+  document.getElementById("buttons").innerHTML = "";
+}
+
+function levenshteinDistance(a, b) {
+  const matrix = Array.from({ length: a.length + 1 }, () =>
+    Array(b.length + 1).fill(0)
+  );
+
+  for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+  for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      matrix[i][j] = Math.min(
+        matrix[i - 1][j] + 1,
+        matrix[i][j - 1] + 1,
+        matrix[i - 1][j - 1] + cost
+      );
+    }
   }
-}
 
+  return matrix[a.length][b.length];
 }
 
 
