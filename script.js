@@ -114,8 +114,18 @@ function teachRandomWord() {
 
 // Open the dictionary from the start screen
 function openDictionary() {
-  startScreen.style.display = 'none';
-  dictionaryContainer.style.display = 'block';
+  const startScreen = document.getElementById('start-screen');
+  const dictionaryContainer = document.getElementById('dictionary-container');
+
+  // Ensure elements exist before modifying them
+  if (startScreen && dictionaryContainer) {
+    startScreen.style.display = 'none'; // Hide the start screen
+    dictionaryContainer.style.display = 'block'; // Show the dictionary
+  } else {
+    console.error('Start screen or dictionary container not found.');
+  }
+}
+
 }
 
 
