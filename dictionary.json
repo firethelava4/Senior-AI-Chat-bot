@@ -111,5 +111,5 @@
     "definition": "A self-replicating malware that spreads across computers without user intervention.",
     "example": "A worm infects a company's network and slows down all connected systems."
   }
-  // Add more terms as needed
+
 }
