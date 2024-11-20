@@ -1,16 +1,20 @@
 {
   "phishing": {
     "definition": "A type of cyberattack where attackers impersonate legitimate organizations to trick individuals into providing sensitive information.",
-    "example": "An attacker sends an email that looks like it's from your bank, asking you to verify your account details."
+    "example": "An attacker sends an email that looks like it's from your bank, asking you to verify your account details.",
+    "avoidance": "Do not click on links from unknown senders, and verify the sender's email address before taking any action."
   },
   "malware": {
     "definition": "Malicious software designed to harm, exploit, or otherwise compromise a computer system.",
-    "example": "A virus that encrypts your files and demands a ransom to unlock them."
+    "example": "A virus that encrypts your files and demands a ransom to unlock them.",
+    "avoidance": "Keep your software updated, use antivirus tools, and avoid downloading files from untrusted sources."
   },
   "ransomware": {
     "definition": "A type of malware that encrypts a victim's files and demands payment to restore access.",
-    "example": "A hospital's database is locked by attackers who demand a ransom for the decryption key."
+    "example": "A hospital's database is locked by attackers who demand a ransom for the decryption key.",
+    "avoidance": "Back up important files regularly and avoid clicking on suspicious email attachments or links."
   },
+
   "social engineering": {
     "definition": "Manipulating people into divulging confidential information or performing actions that compromise security.",
     "example": "An attacker calls pretending to be IT support, asking for your password to fix a fake issue."
