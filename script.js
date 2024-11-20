@@ -1,8 +1,13 @@
-const dictionary = {
-  "phishing": { definition: "A type of cyberattack...", example: "Example: An attacker sends..." },
-  "malware": { definition: "Malicious software...", example: "Example: A virus that..." },
-  // Add the rest of your dictionary terms here...
-};
+let dictionary = {};
+
+fetch('dictionary.json')
+  .then(response => response.json())
+  .then(data => {
+    dictionary = data;
+    console.log('Dictionary loaded:', dictionary);
+  })
+  .catch(error => console.error('Error loading dictionary:', error));
+
 
 let suggestedWord = null;
 
