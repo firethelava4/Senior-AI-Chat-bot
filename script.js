@@ -8,6 +8,31 @@ fetch('dictionary.json')
   })
   .catch(error => console.error('Error loading dictionary:', error));
 
+// Function to display the result
+function displayResult(term) {
+  const definition = dictionary[term]?.definition;
+  const example = dictionary[term]?.example;
+  const avoidance = dictionary[term]?.avoidance;
+
+  if (definition && example) {
+    let outputHTML = `
+      <p><strong>Definition:</strong> ${definition}</p>
+      <p><strong>Example:</strong> ${example}</p>
+    `;
+
+    // Add avoidance tips if available
+    if (avoidance) {
+      outputHTML += `
+        <p><strong>How to Avoid:</strong> ${avoidance}</p>
+      `;
+    }
+
+    output.innerHTML = outputHTML;
+  } else {
+    output.innerHTML = "<p>Sorry, we couldn't find that term.</p>";
+  }
+}
+
 
 let suggestedWord = null;
 
