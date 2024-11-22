@@ -1,7 +1,6 @@
 {
   "phishing": {
     "definition": "A type of cyberattack where attackers impersonate legitimate organizations to trick individuals into providing sensitive information.",
-    "example": "An attacker sends an email that looks like it's from your bank, asking you to verify your account details.",
     "avoidance": "Do not click on links from unknown senders, and verify the sender's email address before taking any action."
   },
   "malware": {
