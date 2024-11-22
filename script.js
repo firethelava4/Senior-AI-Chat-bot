@@ -21,7 +21,7 @@ function displayResult(term) {
 
     // Add avoidance tips if available
     if (avoidance) {
-      outputHTML += `
+      let outputHTML += `
         <p><strong>How to Avoid:</strong> ${avoidance}</p>
       `;
     }
