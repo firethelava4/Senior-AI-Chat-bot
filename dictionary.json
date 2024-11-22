@@ -114,6 +114,108 @@
   "worm": {
     "definition": "A self-replicating malware that spreads across computers without user intervention.",
     "example": "A worm infects a company's network and slows down all connected systems."
+  },
+  "brute force attack": {
+    "definition": "A trial-and-error method used to decode encrypted data such as passwords or PINs by trying all possible combinations.",
+    "example": "An attacker uses a software tool to try thousands of password combinations to access a user's account.",
+    "avoidance": "Use strong passwords with a mix of characters and enable multi-factor authentication."
+  },
+  "social engineering": {
+    "definition": "Manipulating people into divulging confidential information through deception.",
+    "example": "A scammer pretends to be tech support and tricks a user into providing their account credentials.",
+    "avoidance": "Be cautious with unsolicited requests and verify identities before sharing sensitive information."
+  },
+  "zero-day vulnerability": {
+    "definition": "A security flaw in software that is unknown to the vendor and has no patch available.",
+    "example": "Hackers exploit a zero-day vulnerability in a popular browser before it is patched.",
+    "avoidance": "Keep software updated and use advanced threat detection systems."
+  },
+  "firewall": {
+    "definition": "A security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules.",
+    "example": "A company uses a firewall to block unauthorized access to its internal network.",
+    "avoidance": "Ensure firewalls are properly configured and regularly updated."
+  },
+  "data breach": {
+    "definition": "An incident where sensitive, confidential, or protected data is accessed or disclosed without authorization.",
+    "example": "A company's customer database is leaked online due to poor server security.",
+    "avoidance": "Encrypt sensitive data and regularly audit access permissions."
+  },
+  "man-in-the-middle attack": {
+    "definition": "An attack where the perpetrator intercepts communication between two parties to steal or alter data.",
+    "example": "An attacker intercepts login credentials sent over an unsecured Wi-Fi network.",
+    "avoidance": "Avoid public Wi-Fi for sensitive transactions and use encrypted connections."
+  },
+  "two-factor authentication": {
+    "definition": "An additional layer of security requiring two forms of identification to access an account.",
+    "example": "Logging in requires both a password and a code sent to your phone.",
+    "avoidance": "Enable two-factor authentication wherever available to secure accounts."
+  },
+  "spoofing": {
+    "definition": "Disguising communication from an unknown source as being from a trusted source.",
+    "example": "An attacker sends an email that looks like it's from a trusted coworker to steal information.",
+    "avoidance": "Verify email headers and be cautious of unexpected communication."
+  },
+  "botnet": {
+    "definition": "A network of infected computers controlled remotely by a hacker to perform malicious activities.",
+    "example": "A botnet launches a distributed denial-of-service (DDoS) attack on a website.",
+    "avoidance": "Use antivirus software and avoid clicking on suspicious links."
+  },
+  "encryption": {
+    "definition": "The process of converting data into a coded format to prevent unauthorized access.",
+    "example": "A secure messaging app encrypts messages so only the sender and receiver can read them.",
+    "avoidance": "Use services that provide end-to-end encryption for sensitive data."
+  },
+  "keylogger": {
+    "definition": "A type of spyware that records every keystroke made on a computer to steal sensitive information.",
+    "example": "A malicious program captures passwords entered into a banking site.",
+    "avoidance": "Install and update antivirus software and avoid downloading files from untrusted sources."
+  },
+  "clickjacking": {
+    "definition": "A technique where attackers trick users into clicking on something different from what they perceive.",
+    "example": "A fake 'play' button on a video redirects the user to a malicious site.",
+    "avoidance": "Avoid clicking on suspicious or overly enticing buttons and links."
+  },
+  "denial-of-service attack": {
+    "definition": "An attack that overwhelms a server with traffic, making it unavailable to users.",
+    "example": "A website becomes inaccessible after attackers flood it with requests.",
+    "avoidance": "Use a content delivery network (CDN) and implement rate limiting."
+  },
+  "patch management": {
+    "definition": "The process of updating software to fix vulnerabilities and improve performance.",
+    "example": "A company installs patches to close a critical security flaw in its operating system.",
+    "avoidance": "Regularly check for and install software updates and patches."
+  },
+  "rootkit": {
+    "definition": "A type of malicious software that provides privileged access to a computer while hiding its presence.",
+    "example": "A hacker uses a rootkit to gain control of a system without the user knowing.",
+    "avoidance": "Run regular system scans and reinstall the operating system if compromised."
+  },
+  "spyware": {
+    "definition": "Software that secretly gathers user information without their consent.",
+    "example": "An app collects sensitive data like browsing history and sends it to advertisers.",
+    "avoidance": "Install trusted software only and use anti-spyware tools."
+  },
+  "trojan horse": {
+    "definition": "A type of malware disguised as legitimate software to trick users into installing it.",
+    "example": "A fake antivirus program infects a user's computer with malware.",
+    "avoidance": "Avoid downloading software from untrusted sources and verify authenticity."
+  },
+  "whaling": {
+    "definition": "A targeted phishing attack aimed at high-profile individuals, such as executives.",
+    "example": "A scam email tricks a CEO into wiring money to a fraudulent account.",
+    "avoidance": "Train employees to recognize phishing attempts and verify requests independently."
+  },
+  "honeypot": {
+    "definition": "A decoy system or server used to attract cyber attackers and study their methods.",
+    "example": "Security researchers set up a honeypot to detect attempts to exploit vulnerabilities.",
+    "avoidance": "Utilize honeypots to enhance network security and detect threats."
+  },
+  "sandboxing": {
+    "definition": "A security practice of running code in an isolated environment to prevent it from affecting other systems.",
+    "example": "A suspicious file is opened in a sandbox to check for malware.",
+    "avoidance": "Use sandboxing tools to test untrusted applications or files."
   }
+}
+
 
 }
