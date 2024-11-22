@@ -1,37 +1,8 @@
-let dictionary = {};
-
-fetch('dictionary.json')
-  .then(response => response.json())
-  .then(data => {
-    dictionary = data;
-    console.log('Dictionary loaded:', dictionary);
-  })
-  .catch(error => console.error('Error loading dictionary:', error));
-
-// Function to display the result
-function displayResult(term) {
-  const definition = dictionary[term]?.definition;
-  const example = dictionary[term]?.example;
-
-  if (definition && example) {
-    let outputHTML = `
-      <p><strong>Definition:</strong> ${definition}</p>
-      <p><strong>Example:</strong> ${example}</p>
-    `;
-
-    // Add avoidance tips if available
-    if (avoidance) {
-      let outputHTML += `
-        <p><strong>How to Avoid:</strong> ${avoidance}</p>
-      `;
-    }
-
-    output.innerHTML = outputHTML;
-  } else {
-    output.innerHTML = "<p>Sorry, we couldn't find that term.</p>";
-  }
-}
-
+const dictionary = {
+  "phishing": { definition: "A type of cyberattack...", example: "Example: An attacker sends..." },
+  "malware": { definition: "Malicious software...", example: "Example: A virus that..." },
+  // Add the rest of your dictionary terms here...
+};
 
 let suggestedWord = null;
 
@@ -151,5 +122,6 @@ function levenshteinDistance(a, b) {
 
   return matrix[a.length][b.length];
 }
+
 
 
