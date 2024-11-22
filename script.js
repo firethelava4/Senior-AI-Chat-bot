@@ -12,7 +12,6 @@ fetch('dictionary.json')
 function displayResult(term) {
   const definition = dictionary[term]?.definition;
   const example = dictionary[term]?.example;
-  const avoidance = dictionary[term]?.avoidance;
 
   if (definition && example) {
     let outputHTML = `
@@ -47,13 +46,11 @@ function showSuggestions() {
   const output = document.getElementById("output");
   const definition = document.getElementById("definition");
   const example = document.getElementById("example");
-  const avoidance = document.getElementById("avoidance");
   const buttons = document.getElementById("buttons");
 
   suggestionsDiv.innerHTML = "";
   definition.textContent = "";
   example.textContent = "";
-  avoidance.textContent = "";
   buttons.innerHTML = "";
 
   if (!input) return;
@@ -87,7 +84,6 @@ function defineTerm(term) {
   const output = dictionary[term];
   document.getElementById("definition").textContent = `Definition: ${output.definition}`;
   document.getElementById("example").textContent = `Example: ${output.example}`;
-  document.getElementById("avoidance").textContent = `Example: ${output.example}`;
   document.getElementById("term-input").value = term;
   document.getElementById("suggestions").innerHTML = "";
 }
@@ -132,7 +128,6 @@ function resetGreeting() {
   document.getElementById("definition").textContent = "Type a term to learn more!";
   document.getElementById("example").textContent = "";
   document.getElementById("buttons").innerHTML = "";
-   document.getElementById("avoidance").innerHTML = "";
 }
 
 function levenshteinDistance(a, b) {
